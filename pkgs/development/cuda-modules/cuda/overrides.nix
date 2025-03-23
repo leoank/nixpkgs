@@ -329,6 +329,7 @@ filterAndCreateOverrides {
         moveToOutput 'ncu-ui' "''${!outputBin}/bin"
         moveToOutput 'host/*' "''${!outputBin}/bin"
         moveToOutput 'target/*' "''${!outputBin}/bin"
+        wrapQtApp "''${!outputBin}/bin/host/linux-desktop-*/ncu-ui.bin"
       '';
       brokenConditions = prevAttrs.brokenConditions // {
         "Qt 5 missing (<2022.2.0)" = !(versionOlder version "2022.2.0" -> qt5 != null);
