@@ -302,6 +302,9 @@ filterAndCreateOverrides {
       qt5 ? null,
       qt6 ? null,
       rdma-core,
+      e2fsprogs,
+      ucx,
+
     }:
     prevAttrs:
     let
@@ -320,6 +323,8 @@ filterAndCreateOverrides {
       buildInputs = prevAttrs.buildInputs ++ [
         qtwebview
         rdma-core
+        ucx
+        e2fsprogs
         qtwayland
         (qt.qtwebengine or qt.full)
       ];
@@ -329,7 +334,6 @@ filterAndCreateOverrides {
         moveToOutput 'ncu-ui' "''${!outputBin}/bin"
         moveToOutput 'host/*' "''${!outputBin}/bin"
         moveToOutput 'target/*' "''${!outputBin}/bin"
-        wrapQtApp "''${!outputBin}/bin/host/linux-desktop-*/ncu-ui.bin"
       '';
       brokenConditions = prevAttrs.brokenConditions // {
         "Qt 5 missing (<2022.2.0)" = !(versionOlder version "2022.2.0" -> qt5 != null);
@@ -350,6 +354,7 @@ filterAndCreateOverrides {
       qt6 ? null,
       rdma-core,
       ucx,
+      e2fsprogs,
       wayland,
       xorg,
       boost178,
@@ -410,6 +415,7 @@ filterAndCreateOverrides {
         qtWaylandPlugins
         rdma-core
         ucx
+        e2fsprogs
         wayland
         xorg.libXcursor
         xorg.libXdamage
